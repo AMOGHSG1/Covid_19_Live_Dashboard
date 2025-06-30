@@ -1,0 +1,214 @@
+table 'public covid_stats'
+	lineageTag: 54df8543-1f34-473a-abc7-abf091e18a64
+
+	column country
+		dataType: string
+		lineageTag: 69f56e62-3cb6-4ab2-bb86-d991486ae3ef
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column cases
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a131d1c-c465-4ee1-a07e-a5f161149bc0
+		summarizeBy: sum
+		sourceColumn: cases
+
+		annotation SummarizationSetBy = Automatic
+
+	column today_cases
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d4ab969-77d5-4475-920d-f7f8f5ca0946
+		summarizeBy: sum
+		sourceColumn: today_cases
+
+		annotation SummarizationSetBy = Automatic
+
+	column deaths
+		dataType: int64
+		formatString: 0
+		lineageTag: a6cab026-2914-4a5b-ba16-4691419f51f7
+		summarizeBy: sum
+		sourceColumn: deaths
+
+		annotation SummarizationSetBy = Automatic
+
+	column today_deaths
+		dataType: int64
+		formatString: 0
+		lineageTag: 374b820b-73ab-4a2b-b599-ae04edb8ba0c
+		summarizeBy: sum
+		sourceColumn: today_deaths
+
+		annotation SummarizationSetBy = Automatic
+
+	column recovered
+		dataType: int64
+		formatString: 0
+		lineageTag: 50d37782-4f7f-4f2e-8962-ee7bb0d03d3c
+		summarizeBy: sum
+		sourceColumn: recovered
+
+		annotation SummarizationSetBy = Automatic
+
+	column active
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a4d631d-5318-4a0f-a0a3-9fe725a2d6e4
+		summarizeBy: sum
+		sourceColumn: active
+
+		annotation SummarizationSetBy = Automatic
+
+	column critical
+		dataType: int64
+		formatString: 0
+		lineageTag: 7293bc42-5405-4044-920b-a68b527c8657
+		summarizeBy: sum
+		sourceColumn: critical
+
+		annotation SummarizationSetBy = Automatic
+
+	column cases_per_million
+		dataType: int64
+		formatString: 0
+		lineageTag: 7aea413b-785b-4b44-ae9f-b77da881fa8b
+		summarizeBy: sum
+		sourceColumn: cases_per_million
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"public covid_stats","TableItemName":"cases_per_million (bins)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column deaths_per_million
+		dataType: int64
+		formatString: 0
+		lineageTag: 451d0a11-9baf-4032-8369-8beecd28d107
+		summarizeBy: sum
+		sourceColumn: deaths_per_million
+
+		annotation SummarizationSetBy = Automatic
+
+	column tests
+		dataType: int64
+		formatString: 0
+		lineageTag: e5e545ed-edfe-4800-bce3-ccd5fd394ff1
+		summarizeBy: sum
+		sourceColumn: tests
+
+		annotation SummarizationSetBy = Automatic
+
+	column tests_per_million
+		dataType: int64
+		formatString: 0
+		lineageTag: 73a74808-537b-4ed6-80f4-9dc71995732b
+		summarizeBy: sum
+		sourceColumn: tests_per_million
+
+		annotation SummarizationSetBy = Automatic
+
+	column population
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ecb3712-1be5-420e-98e6-795be7fb53b9
+		summarizeBy: sum
+		sourceColumn: population
+
+		annotation SummarizationSetBy = Automatic
+
+	column continent
+		dataType: string
+		lineageTag: ea72eb9a-31ea-47c7-a108-36acf4914760
+		summarizeBy: none
+		sourceColumn: continent
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_updated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7e750bb1-92b6-412a-87cf-4117763e31a2
+		summarizeBy: none
+		sourceColumn: last_updated
+
+		variation Variation
+			isDefault
+			relationship: ed73943e-0acb-4d65-88e4-a303b4567095
+			defaultHierarchy: LocalDateTable_306ace07-7304-456b-960e-dceeb06055b2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fetch_time
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7f31a349-d107-4453-ae12-7b843fe353a9
+		summarizeBy: none
+		sourceColumn: fetch_time
+
+		variation Variation
+			isDefault
+			relationship: 5fc67d95-2588-4271-adac-f22c738d1fc2
+			defaultHierarchy: LocalDateTable_6afe9180-892a-4d20-9dee-ee3f8e719df4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'cases_per_million (bins)' =
+			IF(
+				ISBLANK('public covid_stats'[cases_per_million]),
+				BLANK(),
+				INT('public covid_stats'[cases_per_million] / 100000) * 100000
+			)
+		formatString: 0
+		lineageTag: c0e88009-7754-4e9c-bcfd-16e4013435a5
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "public covid_stats"
+				          }
+				        },
+				        "Property": "cases_per_million"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 100000.0,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"p","Entity":"public covid_stats"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"cases_per_million"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"p"}},"Property":"cases_per_million"}},"Size":100000.0}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'continent Hierarchy'
+		lineageTag: 39307e40-87cc-4b13-ae8e-16738f439f91
+
+		level continent
+			lineageTag: 88ae4207-0886-4449-84c2-3b927f91b354
+			column: continent
+
+	partition 'public covid_stats' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "Covid_Live"),
+				    public_covid_stats = Source{[Schema="public",Item="covid_stats"]}[Data]
+				in
+				    public_covid_stats
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

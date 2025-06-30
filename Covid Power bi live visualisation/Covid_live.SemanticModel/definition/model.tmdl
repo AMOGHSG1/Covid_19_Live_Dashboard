@@ -1,0 +1,23 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["public covid_stats"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.144.878.0 (25.06)+9cca29236de5114792f4d7188221f91ad4a5cc50
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'public covid_stats'
+ref table DateTableTemplate_5e2b4f65-a202-4f0c-b151-164a6b7163c8
+ref table LocalDateTable_306ace07-7304-456b-960e-dceeb06055b2
+ref table LocalDateTable_6afe9180-892a-4d20-9dee-ee3f8e719df4
+
+ref cultureInfo en-IN
+

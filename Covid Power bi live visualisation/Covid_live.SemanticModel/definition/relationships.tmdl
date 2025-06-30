@@ -1,0 +1,10 @@
+relationship ed73943e-0acb-4d65-88e4-a303b4567095
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'public covid_stats'.last_updated
+	toColumn: LocalDateTable_306ace07-7304-456b-960e-dceeb06055b2.Date
+
+relationship 5fc67d95-2588-4271-adac-f22c738d1fc2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'public covid_stats'.fetch_time
+	toColumn: LocalDateTable_6afe9180-892a-4d20-9dee-ee3f8e719df4.Date
+
